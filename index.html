@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Gubbins App Development</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,47 +13,63 @@
       line-height: 1.6;
       color: #333;
     }
+
     header {
       background-color: #6a0dad; /* Purple banner */
       color: white;
       text-align: center;
       padding: 3rem 1rem;
     }
+
     header h1 {
       margin: 0;
       font-size: 2.5rem;
     }
+
     header p {
       margin: 0.5rem 0 0;
       font-size: 1.25rem;
       font-weight: 300;
     }
+
     .container {
       padding: 2rem 1rem;
       max-width: 800px;
       margin: auto;
     }
+
     .app-listing {
       margin-bottom: 2rem;
     }
+
     .app-title {
       font-size: 1.5rem;
       margin: 0.5rem 0;
       color: #6a0dad;
     }
+
+    .under-development {
+      display: block;
+      font-size: 0.65em;
+      font-style: italic;
+    }
+
     .app-desc {
       margin: 0.25rem 0 0.75rem;
     }
+
     a.app-link {
       color: #6a0dad;
       text-decoration: none;
       font-weight: bold;
     }
+
     hr {
       border: none;
       border-top: 1px solid #ccc;
       margin: 2rem 0;
     }
+
     footer {
       text-align: center;
       font-size: 0.9rem;
@@ -61,6 +78,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Purple Banner -->
@@ -71,14 +89,17 @@
 
   <div class="container">
 
-    <!-- Placeholder App Listings -->
+    <!-- App Listings -->
     <section>
+
       <div class="app-listing">
         <div class="app-title">Club Fee Tracker</div>
         <div class="app-desc">
           The easy way to track a club’s membership fees.
         </div>
-        <a class="app-link" href="club-fee-tracker" target="https://gubbins-app-dev.github.io/">Learn more or download &raquo;</a>
+        <a class="app-link" href="club-fee-tracker">
+          Learn more or download &raquo;
+        </a>
       </div>
 
       <div class="app-listing">
@@ -86,24 +107,38 @@
         <div class="app-desc">
           Smart location tracking for trips, treks, and peace of mind.
         </div>
-        <a class="app-link" href="trek-trkr" target="https://gubbins-app-dev.github.io/">Learn more or download &raquo;</a>
+        <a class="app-link" href="trek-trkr">
+          Learn more or download &raquo;
+        </a>
       </div>
 
       <div class="app-listing">
-        <div class="app-title">Martian Eye (under development)</div>
+        <div class="app-title">
+          Martian Eye
+          <span class="under-development">under development</span>
+        </div>
         <div class="app-desc">
           Explore Mars through the eyes of its rovers, discovering stunning images captured from the surface of the Red Planet.
         </div>
-        <a class="app-link" href="martian-eye" target="https://gubbins-app-dev.github.io/">Learn more or download &raquo;</a>
+        <a class="app-link" href="martian-eye">
+          Learn more or download &raquo;
+        </a>
       </div>
-      
+
       <div class="app-listing">
-        <div class="app-title">Memory Box (under development)</div>
+        <div class="app-title">
+          Memory Box
+          <span class="under-development">under development</span>
+        </div>
         <div class="app-desc">
           A beautifully simple space to capture and share memories — all organised your way in one living digital box.
         </div>
-        <a class="app-link" href="mbox" target="https://gubbins-app-dev.github.io/">Learn more or download &raquo;</a>
+        <a class="app-link" href="mbox">
+          Learn more or download &raquo;
+        </a>
       </div>
+
+    </section>
 
     <hr />
 
@@ -112,28 +147,44 @@
       <h2>Privacy Policy</h2>
       <p><strong>Effective Date:</strong> January 11, 2026</p>
 
-      <p>At <strong>Gubbins App Development</strong> (“we”, “us”, or “our”), we respect your privacy and are committed to protecting it when you visit this website or use our applications. This Privacy Policy explains what information we collect, how we use it, and your choices regarding that information.</p>
+      <p>
+        At <strong>Gubbins App Development</strong> (“we”, “us”, or “our”), we respect your privacy and are committed to protecting it when you visit this website or use our applications. This Privacy Policy explains what information we collect, how we use it, and your choices regarding that information.
+      </p>
 
       <h3>Information We Collect</h3>
-      <p>We may collect non‑personal information automatically through standard web and app analytics, such as device type, browser type, pages visited, and interaction data. We do not collect personally identifiable information unless you choose to provide it.</p>
+      <p>
+        We may collect non-personal information automatically through standard web and app analytics, such as device type, browser type, pages visited, and interaction data. We do not collect personally identifiable information unless you choose to provide it.
+      </p>
 
       <h3>Use of Information</h3>
-      <p>Information is used to operate, maintain, and improve our apps and website, and to respond to support or contact requests.</p>
+      <p>
+        Information is used to operate, maintain, and improve our apps and website, and to respond to support or contact requests.
+      </p>
 
-      <h3>Third‑Party Services</h3>
-      <p>Our apps and website may use third‑party services such as analytics providers, hosting platforms, or app store services. These third parties may collect information in accordance with their own privacy policies.</p>
+      <h3>Third-Party Services</h3>
+      <p>
+        Our apps and website may use third-party services such as analytics providers, hosting platforms, or app store services. These third parties may collect information in accordance with their own privacy policies.
+      </p>
 
       <h3>Security</h3>
-      <p>We take reasonable measures to protect collected information, but no method of transmission or storage is completely secure.</p>
+      <p>
+        We take reasonable measures to protect collected information, but no method of transmission or storage is completely secure.
+      </p>
 
       <h3>Children’s Privacy</h3>
-      <p>Our services are not intended for children under the age of 13, and we do not knowingly collect personal data from children.</p>
+      <p>
+        Our services are not intended for children under the age of 13, and we do not knowingly collect personal data from children.
+      </p>
 
       <h3>Copyright</h3>
-      <p>All content, branding, design elements, text, graphics, and software associated with this website and our applications are the intellectual property of <strong>Gubbins App Development &copy;</strong>, unless otherwise stated. You may not copy, reproduce, distribute, or create derivative works from this content without prior written permission.</p>
+      <p>
+        All content, branding, design elements, text, graphics, and software associated with this website and our applications are the intellectual property of <strong>Gubbins App Development &copy;</strong>, unless otherwise stated. You may not copy, reproduce, distribute, or create derivative works from this content without prior written permission.
+      </p>
 
       <h3>Policy Changes</h3>
-      <p>This Privacy Policy may be updated periodically. Any changes will be posted on this page with an updated effective date.</p>
+      <p>
+        This Privacy Policy may be updated periodically. Any changes will be posted on this page with an updated effective date.
+      </p>
     </section>
 
   </div>
