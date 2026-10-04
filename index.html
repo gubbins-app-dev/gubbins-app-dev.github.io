@@ -1,199 +1,220 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1022">
+  <meta name="description" content="Clean, modern iOS apps from Gubbins App Development.">
   <title>Gubbins App Development</title>
-
   <style>
+    :root {
+      color-scheme: light;
+      --ink: #171b2c;
+      --muted: #677087;
+      --navy: #0b1022;
+      --blue: #6578ff;
+      --purple: #9c68f5;
+      --line: #e7e9f1;
+      --surface: #fff;
+      --page: #f7f8fc;
+      --shadow: 0 18px 50px rgba(28, 36, 70, .08);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      color: #333;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
-
-    header {
-      background-color: #101C2F; /* dark blue banner */
-      color: white;
-      text-align: center;
-      padding: 3rem 1rem;
+    a { color: inherit; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #a99aff; outline-offset: 4px; border-radius: 5px; }
+    .shell { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+    .hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      color: #fff;
+      background: radial-gradient(ellipse at 82% 16%, rgba(121, 91, 255, .28), transparent 36%),
+                  radial-gradient(ellipse at 6% 94%, rgba(52, 112, 255, .19), transparent 40%),
+                  linear-gradient(135deg, #0b1022 0%, #121a36 58%, #191a3e 100%);
     }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
+    .hero::after {
+      content: ""; position: absolute; z-index: -1; width: 460px; height: 460px; right: -190px; bottom: -320px;
+      border: 1px solid rgba(255,255,255,.11); border-radius: 50%; box-shadow: 0 0 0 46px rgba(255,255,255,.025), 0 0 0 92px rgba(255,255,255,.02);
     }
-
-    header p {
-      margin: 0.5rem 0 0;
-      font-size: 1.25rem;
-      font-weight: 300;
+    .topbar { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 700; letter-spacing: -.02em; }
+    .brand img { width: 38px; height: 38px; object-fit: cover; border-radius: 12px; background: rgba(255,255,255,.12); }
+    .brand span { font-size: .95rem; }
+    .nav { display: flex; align-items: center; gap: 28px; }
+    .nav a { color: #d9def0; font-size: .9rem; text-decoration: none; transition: color .2s ease; }
+    .nav a:hover { color: #fff; }
+    .hero-content { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(240px, .8fr); align-items: center; gap: 64px; padding-block: clamp(76px, 10vw, 132px); }
+    .eyebrow { margin: 0 0 18px; color: #b8c1ff; font-size: .76rem; font-weight: 750; letter-spacing: .17em; text-transform: uppercase; }
+    h1 { max-width: 720px; margin: 0; font-size: clamp(2.8rem, 6.3vw, 5.5rem); font-weight: 750; letter-spacing: -.065em; line-height: 1.02; }
+    .gradient-text { color: #b7a6ff; background: linear-gradient(95deg, #96a6ff, #d6a4ff); background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-copy { max-width: 565px; margin: 24px 0 0; color: #c2c9dc; font-size: clamp(1.02rem, 1.7vw, 1.18rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 19px; border: 1px solid transparent; border-radius: 13px; font-size: .92rem; font-weight: 700; text-decoration: none; transition: transform .2s ease, background .2s ease; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { color: #10142a; background: linear-gradient(100deg, #b5c0ff, #d4aaff); }
+    .button-secondary { color: #f2f3fb; border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.045); }
+    .logo-stage { display: grid; place-items: center; position: relative; min-height: 320px; }
+    .logo-glow { position: absolute; width: min(330px, 76vw); aspect-ratio: 1; border-radius: 50%; background: linear-gradient(135deg, rgba(86,117,255,.45), rgba(177,103,255,.34)); filter: blur(55px); }
+    .logo-frame { position: relative; width: clamp(190px, 26vw, 270px); aspect-ratio: 1; padding: 12px; border: 1px solid rgba(255,255,255,.28); border-radius: 34px; background: linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,.05)); box-shadow: 0 32px 85px rgba(0,0,0,.32); transform: rotate(4deg); }
+    .logo-frame img { width: 100%; height: 100%; display: block; object-fit: cover; border-radius: 24px; }
+    main { padding-block: clamp(64px, 8vw, 100px); }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 28px; margin-bottom: 30px; }
+    .section-heading h2 { margin: 0; font-size: clamp(1.9rem, 3.5vw, 2.65rem); letter-spacing: -.045em; line-height: 1.15; }
+    .section-heading p { max-width: 400px; margin: 0; color: var(--muted); }
+    .app-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .app-card { display: flex; flex-direction: column; min-height: 238px; padding: 27px; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); box-shadow: 0 4px 14px rgba(30,39,75,.025); transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+    .app-card:hover { transform: translateY(-4px); border-color: #d8d9f5; box-shadow: var(--shadow); }
+    .app-card-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .app-icon { position: relative; display: grid; place-items: center; width: 64px; height: 64px; flex: 0 0 auto; overflow: hidden; border-radius: 18px; color: #fff; background: linear-gradient(140deg, #667dff, #a16bf4); font-size: 1rem; font-weight: 800; box-shadow: 0 8px 20px rgba(103,116,255,.23); }
+    .app-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+    .app-card:nth-child(2) .app-icon { background: linear-gradient(140deg, #3a9ee8, #6b78ff); }
+    .app-card:nth-child(3) .app-icon { background: linear-gradient(140deg, #ec6c55, #c54463); }
+    .app-card:nth-child(4) .app-icon { background: linear-gradient(140deg, #a574ef, #e47ab4); }
+    .status { display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px; border-radius: 99px; color: #7651b2; background: #f5efff; font-size: .72rem; font-weight: 700; }
+    .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #9c68f5; }
+    .app-card h3 { margin: 21px 0 5px; font-size: 1.22rem; letter-spacing: -.025em; }
+    .app-card p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .app-link { display: inline-flex; align-items: center; gap: 8px; width: fit-content; margin-top: auto; padding-top: 22px; color: #4f5ed6; font-size: .9rem; font-weight: 750; text-decoration: none; }
+    .app-link span { transition: transform .2s ease; }
+    .app-link:hover span { transform: translateX(4px); }
+    .privacy { margin-top: clamp(72px, 10vw, 120px); padding: clamp(24px, 5vw, 48px); border: 1px solid var(--line); border-radius: 24px; background: #fff; }
+    .privacy-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .privacy h2 { margin: 0; font-size: clamp(1.7rem, 3vw, 2.2rem); letter-spacing: -.04em; }
+    .effective { margin: 0; color: var(--muted); font-size: .86rem; }
+    .policy-intro { margin: 22px 0; color: #515b70; }
+    .policy-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 36px; row-gap: 5px; }
+    .policy-grid h3 { margin: 23px 0 5px; font-size: 1rem; }
+    .policy-grid p { margin: 0; color: var(--muted); font-size: .9rem; }
+    footer { color: #d6daea; background: var(--navy); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 22px; min-height: 100px; }
+    footer p { margin: 0; font-size: .88rem; }
+    .footer-links a { color: #c4b3ff; font-weight: 650; text-decoration: none; }
+    .footer-links a:hover { color: #fff; text-decoration: underline; }
+    @media (max-width: 760px) {
+      .hero-content { grid-template-columns: 1fr; gap: 34px; padding-block: 68px 54px; }
+      .logo-stage { min-height: 235px; }
+      .logo-frame { width: 190px; border-radius: 27px; }
+      .logo-frame img { border-radius: 19px; }
+      .section-heading { align-items: start; flex-direction: column; gap: 10px; }
     }
-
-    .container {
-      padding: 2rem 1rem;
-      max-width: 800px;
-      margin: auto;
+    @media (max-width: 600px) {
+      .shell { width: min(100% - 36px, 1120px); }
+      .topbar { min-height: 72px; }
+      .brand span { max-width: 145px; font-size: .83rem; }
+      .brand img { width: 34px; height: 34px; border-radius: 10px; }
+      .nav { gap: 16px; }
+      .nav a { font-size: .82rem; }
+      .nav a:first-child { display: none; }
+      .hero-content { padding-top: 57px; }
+      h1 { font-size: clamp(2.75rem, 14vw, 4rem); }
+      .app-grid, .policy-grid { grid-template-columns: 1fr; }
+      .app-card { min-height: 220px; padding: 23px; }
+      .privacy { padding: 24px 20px; border-radius: 19px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; justify-content: center; padding-block: 25px; }
     }
-
-    .app-listing {
-      margin-bottom: 2rem;
-    }
-
-    .app-title {
-      font-size: 1.5rem;
-      margin: 0.5rem 0;
-      color: #101C2F;
-    }
-
-    .under-development {
-      display: block;
-      font-size: 0.65em;
-      font-style: italic;
-    }
-
-    .app-desc {
-      margin: 0.25rem 0 0.75rem;
-    }
-
-    a.app-link {
-      color: #101C2F;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    hr {
-      border: none;
-      border-top: 1px solid #ccc;
-      margin: 2rem 0;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      padding: 1rem;
-      color: #666;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
     }
   </style>
 </head>
-
 <body>
-
-  <!-- Purple Banner -->
-  <header>
-    <h1>Gubbins App Development &copy;</h1>
-    <p>CLEAN  /  MODERN  /  IOS FOCUSED</p>
+  <header class="hero" id="top">
+    <div class="shell">
+      <nav class="topbar" aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="Gubbins App Development home">
+          <img src="gubbins-logo.png" alt="" width="1024" height="1024">
+          <span>Gubbins App Development ©</span>
+        </a>
+        <div class="nav">
+          <a href="#apps">Our apps</a>
+          <a href="#privacy">Privacy</a>
+          <a href="mailto:gubbins.app.dev@icloud.com">Contact</a>
+        </div>
+      </nav>
+      <div class="hero-content">
+        <div>
+          <p class="eyebrow">Clean · Modern · iOS focused</p>
+          <h1>Thoughtful apps.<br><span class="gradient-text">Made for iOS.</span></h1>
+          <p class="hero-copy">Useful, beautifully simple apps designed to make everyday life a little easier — from managing club fees to exploring the surface of Mars.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#apps">Explore our apps <span aria-hidden="true">↗</span></a>
+            <a class="button button-secondary" href="mailto:gubbins.app.dev@icloud.com">Get in touch</a>
+          </div>
+        </div>
+        <div class="logo-stage" aria-label="Gubbins App Development logo">
+          <div class="logo-glow" aria-hidden="true"></div>
+          <div class="logo-frame"><img src="gubbins-logo.png" alt="Gubbins App Development logo" width="1024" height="1024"></div>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <div class="container">
-
-    <!-- App Listings -->
-    <section>
-
-      <div class="app-listing">
-        <div class="app-title">Club Fee Tracker</div>
-        <div class="app-desc">
-          The easy way to track a club’s membership fees.
-        </div>
-        <a class="app-link" href="club-fee-tracker">
-          Learn more or download &raquo;
-        </a>
+  <main class="shell">
+    <section id="apps" aria-labelledby="apps-heading">
+      <div class="section-heading">
+        <div><p class="eyebrow" style="color:#6975dc;margin-bottom:10px">Made with care</p><h2 id="apps-heading">Apps for real life</h2></div>
+        <p>Simple ideas, thoughtfully built for the things you do every day.</p>
       </div>
-
-      <div class="app-listing">
-        <div class="app-title">Trek Trkr</div>
-        <div class="app-desc">
-          Smart location tracking for trips, treks, and peace of mind.
-        </div>
-        <a class="app-link" href="trek-trkr">
-          Learn more or download &raquo;
-        </a>
+      <div class="app-grid">
+        <article class="app-card">
+          <div class="app-card-top"><div class="app-icon" aria-label="Club Fee Tracker icon"><span aria-hidden="true">CF</span><img class="app-art" src="club-fee-tracker-icon.png" alt="" onerror="this.hidden=true"></div></div>
+          <h3>Club Fee Tracker</h3>
+          <p>The easy way to track a club’s membership fees.</p>
+          <a class="app-link" href="club-fee-tracker">Learn more or download <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="app-card">
+          <div class="app-card-top"><div class="app-icon" aria-label="Trek Trkr icon"><span aria-hidden="true">TT</span><img class="app-art" src="trek-trkr-icon.png" alt="" onerror="this.hidden=true"></div></div>
+          <h3>Trek Trkr</h3>
+          <p>Smart location tracking for trips, treks, and peace of mind.</p>
+          <a class="app-link" href="trek-trkr">Learn more or download <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="app-card">
+          <div class="app-card-top"><div class="app-icon" aria-label="Martian Eye icon"><span aria-hidden="true">ME</span><img class="app-art" src="martian-eye-icon.png" alt="" onerror="this.hidden=true"></div></div>
+          <h3>Martian Eye</h3>
+          <p>Explore Mars through the eyes of its rovers, discovering stunning images captured from the surface of the Red Planet.</p>
+          <a class="app-link" href="martian-eye">Learn more or download <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="app-card">
+          <div class="app-card-top"><div class="app-icon" aria-label="Memory Box icon"><span aria-hidden="true">MB</span><img class="app-art" src="memory-box-icon.png" alt="" onerror="this.hidden=true"></div><span class="status">Under development</span></div>
+          <h3>Memory Box</h3>
+          <p>A beautifully simple space to capture and share memories — all organised your way in one living digital box.</p>
+          <a class="app-link" href="mbox">Learn more <span aria-hidden="true">→</span></a>
+        </article>
       </div>
-
-      <div class="app-listing">
-        <div class="app-title">
-          Martian Eye
-        </div>
-        <div class="app-desc">
-          Explore Mars through the eyes of its rovers, discovering stunning images captured from the surface of the Red Planet.
-        </div>
-        <a class="app-link" href="martian-eye">
-          Learn more or download &raquo;
-        </a>
-      </div>
-
-      <div class="app-listing">
-        <div class="app-title">
-          Memory Box
-          <span class="under-development">under development</span>
-        </div>
-        <div class="app-desc">
-          A beautifully simple space to capture and share memories — all organised your way in one living digital box.
-        </div>
-        <a class="app-link" href="mbox">
-          Learn more or download &raquo;
-        </a>
-      </div>
-
     </section>
 
-    <hr />
-
-    <!-- Privacy Policy Section -->
-    <section>
-      <h2>Privacy Policy</h2>
-      <p><strong>Effective Date:</strong> January 11, 2026</p>
-
-      <p>
-        At <strong>Gubbins App Development</strong> (“we”, “us”, or “our”), we respect your privacy and are committed to protecting it when you visit this website or use our applications. This Privacy Policy explains what information we collect, how we use it, and your choices regarding that information.
-      </p>
-
-      <h3>Information We Collect</h3>
-      <p>
-        We may collect non-personal information automatically through standard web and app analytics, such as device type, browser type, pages visited, and interaction data. We do not collect personally identifiable information unless you choose to provide it.
-      </p>
-
-      <h3>Use of Information</h3>
-      <p>
-        Information is used to operate, maintain, and improve our apps and website, and to respond to support or contact requests.
-      </p>
-
-      <h3>Third-Party Services</h3>
-      <p>
-        Our apps and website may use third-party services such as analytics providers, hosting platforms, or app store services. These third parties may collect information in accordance with their own privacy policies.
-      </p>
-
-      <h3>Security</h3>
-      <p>
-        We take reasonable measures to protect collected information, but no method of transmission or storage is completely secure.
-      </p>
-
-      <h3>Children’s Privacy</h3>
-      <p>
-        Our services are not intended for children under the age of 13, and we do not knowingly collect personal data from children.
-      </p>
-
-      <h3>Copyright</h3>
-      <p>
-        All content, branding, design elements, text, graphics, and software associated with this website and our applications are the intellectual property of <strong>Gubbins App Development &copy;</strong>, unless otherwise stated. You may not copy, reproduce, distribute, or create derivative works from this content without prior written permission.
-      </p>
-
-      <h3>Policy Changes</h3>
-      <p>
-        This Privacy Policy may be updated periodically. Any changes will be posted on this page with an updated effective date.
-      </p>
+    <section class="privacy" id="privacy" aria-labelledby="privacy-heading">
+      <div class="privacy-head">
+        <h2 id="privacy-heading">Privacy Policy</h2>
+        <p class="effective"><strong>Effective Date:</strong> January 11, 2026</p>
+      </div>
+      <p class="policy-intro">At <strong>Gubbins App Development</strong> (“we”, “us”, or “our”), we respect your privacy and are committed to protecting it when you visit this website or use our applications. This Privacy Policy explains what information we collect, how we use it, and your choices regarding that information.</p>
+      <div class="policy-grid">
+        <div><h3>Information We Collect</h3><p>We may collect non-personal information automatically through standard web and app analytics, such as device type, browser type, pages visited, and interaction data. We do not collect personally identifiable information unless you choose to provide it.</p></div>
+        <div><h3>Use of Information</h3><p>Information is used to operate, maintain, and improve our apps and website, and to respond to support or contact requests.</p></div>
+        <div><h3>Third-Party Services</h3><p>Our apps and website may use third-party services such as analytics providers, hosting platforms, or app store services. These third parties may collect information in accordance with their own privacy policies.</p></div>
+        <div><h3>Security</h3><p>We take reasonable measures to protect collected information, but no method of transmission or storage is completely secure.</p></div>
+        <div><h3>Children’s Privacy</h3><p>Our services are not intended for children under the age of 13, and we do not knowingly collect personal data from children.</p></div>
+        <div><h3>Copyright</h3><p>All content, branding, design elements, text, graphics, and software associated with this website and our applications are the intellectual property of <strong>Gubbins App Development &copy;</strong>, unless otherwise stated. You may not copy, reproduce, distribute, or create derivative works from this content without prior written permission.</p></div>
+        <div><h3>Policy Changes</h3><p>This Privacy Policy may be updated periodically. Any changes will be posted on this page with an updated effective date.</p></div>
+      </div>
     </section>
-
-  </div>
+  </main>
 
   <footer>
-     <p>© 2026 Gubbins App Development. All rights reserved.</p>
-  <p class="footer-links">
-    <a href="mailto:gubbins.app.dev@icloud.com">Contact the developer</a>
-  </p>
+    <div class="shell footer-inner">
+      <p>© 2026 Gubbins App Development. All rights reserved.</p>
+      <p class="footer-links"><a href="mailto:gubbins.app.dev@icloud.com">Contact the developer</a></p>
+    </div>
   </footer>
-
 </body>
 </html>
